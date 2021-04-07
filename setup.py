@@ -76,11 +76,8 @@ setup(
         'Programming Language :: Python :: 3.8',
     ],
     entry_points={
-        'org.molssi.seamm': [
-            'seamm_default_atomtyping = seamm_default_atomtyping:SeammDefaultAtomtypingStep',
-        ],
-        'org.molssi.seamm.tk': [
-            'seamm_default_atomtyping = seamm_default_atomtyping:SeammDefaultAtomtypingStep',
+        'org.molssi.seamm.atom_typers': [
+            'Default = seamm_default_atomtyping:SeammDefaultAtomtypingStep',
         ],
     }
 )
