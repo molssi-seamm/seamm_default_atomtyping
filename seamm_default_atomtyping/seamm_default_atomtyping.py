@@ -80,15 +80,12 @@ class SeammDefaultAtomtyping(seamm.Node):
         """
         logger.debug('Creating seamm_default_atomtyping {}'.format(self))
 
-        super().__init__(
-            flowchart=flowchart,
-            title='seamm_default_atomtyping',
-            extension=extension,
-            module=__name__,
-            logger=logger
-        )  # yapf: disable
+        self.directory = os.getcwd()
+        self.name = self.__class__.__name__
 
-        self.parameters = seamm_default_atomtyping.SeammDefaultAtomtypingParameters()
+        self.forcefield = seamm.Forcefield(filename="/Users/meliseo/Git/SEAMM2/seamm_default_atomtyping/seamm_default_atomtyping/data/pcff2018.frc")
+
+        self.supported_forcefield = [self.forcefield.name]
 
     @property
     def version(self):
@@ -127,68 +124,5 @@ class SeammDefaultAtomtyping(seamm.Node):
 
         return self.header + '\n' + __(text, **P, indent=4 * ' ').__str__()
 
-    def run(self):
-        """Run a seamm_default_atomtyping step.
-
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        seamm.Node
-            The next node object in the flowchart.
-        """
-        next_node = super().run(printer)
-        # Get the values of the parameters, dereferencing any variables
-        P = self.parameters.current_values_to_dict(
-            context=seamm.flowchart_variables._data
-        )
-
-        # Print what we are doing
-        printer.important(__(self.description_text(P), indent=self.indent))
-
-        # Temporary code just to print the parameters. You will need to change
-        # this!
-        for key in P:
-            print('{:>15s} = {}'.format(key, P[key]))
-            printer.normal(
-                __(
-                    '{key:>15s} = {value}',
-                    key=key,
-                    value=P[key],
-                    indent=4 * ' ',
-                    wrap=False,
-                    dedent=False
-                )
-            )
-
-        # Analyze the results
-        self.analyze()
-
-        # Add other citations here or in the appropriate place in the code.
-        # Add the bibtex to data/references.bib, and add a self.reference.cite
-        # similar to the above to actually add the citation to the references.
-
-        return next_node
-
-    def analyze(self, indent='', **kwargs):
-        """Do any analysis of the output from this step.
-
-        Also print important results to the local step.out file using
-        'printer'.
-
-        Parameters
-        ----------
-        indent: str
-            An extra indentation for the output
-        """
-        printer.normal(
-            __(
-                'This is a placeholder for the results from the '
-                'seamm_default_atomtyping step',
-                indent=4 * ' ',
-                wrap=True,
-                dedent=False
-            )
-        )
+    def assign_parameters(self):
+        pass
