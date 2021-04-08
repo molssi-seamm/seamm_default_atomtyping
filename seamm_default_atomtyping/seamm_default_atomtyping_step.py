@@ -48,7 +48,7 @@ class SeammDefaultAtomtypingStep(object):
         """
         return SeammDefaultAtomtypingStep.my_description
 
-    def create_node(self, flowchart=None, **kwargs):
+    def create_atomtyper(self, **kwargs):
         """Create and return the new node object.
 
         Parameters
@@ -72,28 +72,4 @@ class SeammDefaultAtomtypingStep(object):
 
         """
 
-        return seamm_default_atomtyping.SeammDefaultAtomtyping(flowchart=flowchart, **kwargs)
-
-    def create_tk_node(self, canvas=None, **kwargs):
-        """Create and return the graphical Tk node object.
-
-        Parameters
-        ----------
-        canvas : tk.Canvas
-            The Tk Canvas widget
-
-        **kwargs : keyworded arguments
-            Various keyworded arguments such as tk_flowchart, node, x, y, w, h
-            representing a graphical flowchart object, a non-graphical node for
-            a step, and dimensions of the graphical node.
-
-        Returns
-        -------
-        TkSeammDefaultAtomtyping
-
-        See Also
-        --------
-        TkSeammDefaultAtomtyping
-        """
-
-        return seamm_default_atomtyping.TkSeammDefaultAtomtyping(canvas=canvas, **kwargs)
+        return seamm_default_atomtyping.SeammDefaultAtomtyping(**kwargs)
