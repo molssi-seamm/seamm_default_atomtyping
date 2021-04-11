@@ -136,7 +136,7 @@ class SeammDefaultAtomtyping:
         printer.important(
             __(
                 "Assigning the atom types and charges for forcefield "
-                f"'{self.forcefield.name}' to the system",
+                f"'{self.selected_forcefield}' to the system",
             )
         )
 
@@ -251,7 +251,7 @@ class SeammDefaultAtomtyping:
         configuration.atoms[key] = atomtypes
 
         # Now get the charges if forcefield has them.
-        terms = self.forcefield.data['forcefield'][self.forcefield.name]['parameters']
+        terms = self.forcefield.data['forcefield'][self.selected_forcefield]['parameters']
 
         if 'bond_increments' in terms:
             logger.debug('Getting the charges for the system')
@@ -280,7 +280,7 @@ class SeammDefaultAtomtyping:
                     'Charges from increments:\n' + pprint.pformat(charges)
                 )
 
-            key = f'charges_{self.forcefield.name}'
+            key = f'charges_{self.selected_forcefield}'
             if key not in configuration.atoms:
                 configuration.atoms.add_attribute(key, coltype='float')
             charge_column = configuration.atoms.get_column(key)
